@@ -36,6 +36,7 @@ type State struct {
 	IsNight          *bool
 	TemperatureMilli *int32
 	HumidityMilli    *int32
+	LightMilli       *int32
 	NightLight       *bool
 	Standby          *bool
 }
@@ -156,6 +157,21 @@ func (state *State) SetHumidityMilli(value int32) *State {
 func (state *State) GetHumidity() float64 {
 	if state.HumidityMilli != nil {
 		return float64(*state.HumidityMilli) / 1000
+	}
+
+	return 0
+}
+
+// SetLightMilli - mutates field, returns itself
+func (state *State) SetLightMilli(value int32) *State {
+	state.LightMilli = &value
+	return state
+}
+
+// GetLight - returns light level as floating point
+func (state *State) GetLight() float64 {
+	if state.LightMilli != nil {
+		return float64(*state.LightMilli) / 1000
 	}
 
 	return 0

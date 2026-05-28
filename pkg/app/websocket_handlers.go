@@ -19,6 +19,9 @@ func processSensorData(babyUID string, sensorData []*client.SensorData, stateMan
 		if *sensorDataSet.SensorType == client.SensorType_HUMIDITY {
 			stateUpdate.SetHumidityMilli(*sensorDataSet.ValueMilli)
 		}
+		if *sensorDataSet.SensorType == client.SensorType_LIGHT && sensorDataSet.ValueMilli != nil {
+			stateUpdate.SetLightMilli(*sensorDataSet.ValueMilli)
+		}
 		if *sensorDataSet.SensorType == client.SensorType_NIGHT {
 			stateUpdate.SetIsNight(*sensorDataSet.Value == 1)
 		}
